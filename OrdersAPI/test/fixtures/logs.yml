@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  order: one
+  is_refund: false
+  amount: 9.99
+  is_acknowledged: false
+
+two:
+  order: two
+  is_refund: false
+  amount: 9.99
+  is_acknowledged: false
