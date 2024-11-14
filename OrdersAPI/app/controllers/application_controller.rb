@@ -1,5 +1,8 @@
 require "base64"
 require "jwt"
+require "dotenv"
+
+Dotenv.load
 
 class ApplicationController < ActionController::API
   before_action :authenticate_request
@@ -22,7 +25,7 @@ class ApplicationController < ActionController::API
     #   HMACSHA256(base64UrlEncode(header) + "." + base64UrlEncode(payload), "hello")
     #token == "Bearer eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiamVmZnJleTA0In0.gg9FblqVWREIVP4Dc34aUDTRP9fcx7IZBy8ifBKW3us"
     begin
-      payload, _header = JWT.decode(token.split(" ")[-1], "hello", true, { algorithm: "HS256" })
+      payload, _header = JWT.decode(token.split(" ")[-1], ENV["JWT_SECRET"] || "hello", true, { algorithm: "HS256" })
 
       payload["name"] == "jeffrey04"
     rescue => _e
