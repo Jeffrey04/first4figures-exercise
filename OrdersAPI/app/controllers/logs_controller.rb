@@ -24,6 +24,8 @@ class LogsController < ApplicationController
           order.save
         elsif order.order_status != "authorized" and order.order_status != "partially_paid" and order.order_status != "partially_refunded"
           raise "Cannot proceed with payment"
+        elsif params[:amount] <= 0
+          raise "Amount must be positive"
         elsif not log_params[:is_refund]
           raise "Cannot pay further" if check_is_refunding(params[:order_id])
 
